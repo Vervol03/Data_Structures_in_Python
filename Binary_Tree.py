@@ -47,22 +47,17 @@ class Tree:
             self.tree_alignment(righ)
             self.tree_alignment(left)
 
-
-print()
-
+print("\nПриклад не гарного бинарного дерева:")
 array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
 thee = Tree(array[0])
 for val in array: 
     thee.add(val)
 thee.output_from_above()
 
-print()
 sort_thee = thee.list_sort_treet()
-print()
+print("\nНове дерево яке вірівнянно по центру:")
 
 thee = Tree(sort_thee[int(len(sort_thee)/2)])
 thee.tree_alignment(sort_thee)
 thee.output_from_above()
-
-print()
 print()
