@@ -8,23 +8,17 @@ class Tree:
     # додавання
     def add(self, val):
         if val < self.data:
-            if self.left is None: 
-                self.left = Tree(val)
-            else: 
-                self.left.add(val)
+            if self.left is None: self.left = Tree(val)
+            else: self.left.add(val)
         elif val > self.data:
-            if self.rigt is None: 
-                self.rigt = Tree(val)
-            else: 
-                self.rigt.add(val)
+            if self.rigt is None: self.rigt = Tree(val)
+            else: self.rigt.add(val)
 
     # виведення
     def output_from_above(self):
         print(self.data, end= " ")
-        if self.left:
-            self.left.output_from_above()
-        if self.rigt:
-            self.rigt.output_from_above()
+        if self.left: self.left.output_from_above()
+        if self.rigt: self.rigt.output_from_above()
 
     # переведення у список
     def list_sort_treet(self, x=[]):
@@ -48,12 +42,14 @@ class Tree:
             self.tree_alignment(righ,False)
             self.tree_alignment(left,False)
 
+
 def main():
     print("Приклад не гарного бинарного дерева:")
     array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
     tree = Tree(array[0])
     for val in array: tree.add(val)
     tree.output_from_above()
+    
     print("\nНове дерево яке вірівнянно по центру:")
     tree.tree_alignment()
     tree.output_from_above()
