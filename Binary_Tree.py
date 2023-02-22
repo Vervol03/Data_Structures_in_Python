@@ -28,11 +28,9 @@ class Tree:
 
     # переведення у список
     def list_sort_treet(self, x=[]):
-        if self.left:
-            self.left.list_sort_treet()
-        x += [self.data]
-        if self.rigt:
-            self.rigt.list_sort_treet()
+        if self.left: self.left.list_sort_treet()
+        if not self.data in x: x += [self.data]
+        if self.rigt: self.rigt.list_sort_treet()
         return x
 
     # вирівнювання дерева
@@ -50,14 +48,12 @@ class Tree:
             self.tree_alignment(righ,False)
             self.tree_alignment(left,False)
 
-
 def main():
     print("Приклад не гарного бинарного дерева:")
     array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
     tree = Tree(array[0])
     for val in array: tree.add(val)
     tree.output_from_above()
-
     print("\nНове дерево яке вірівнянно по центру:")
     tree.tree_alignment()
     tree.output_from_above()
