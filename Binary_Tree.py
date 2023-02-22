@@ -36,30 +36,31 @@ class Tree:
         return x
 
     # вирівнювання дерева
-    def tree_alignment(self, arr):
+    def tree_alignment(self, arr=[], check = True):
+        if check is True:
+            arr = self.list_sort_treet()
+            self.data = arr[int(len(arr)/2)]
+            self.left, self.rigt = None, None
         if len(arr)==1: self.add(arr[0])
         else:
             mid = int(len(arr)/2)
             self.add(arr[mid])
             righ = arr[mid:]
             left = arr[:mid]
-            self.tree_alignment(righ)
-            self.tree_alignment(left)
+            self.tree_alignment(righ,False)
+            self.tree_alignment(left,False)
 
 
 def main():
     print("Приклад не гарного бинарного дерева:")
     array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
-    thee = Tree(array[0])
-    for val in array: thee.add(val)
-    thee.output_from_above()
-    
-    sort_thee = thee.list_sort_treet()
-    print("\nНове дерево яке вірівнянно по центру:")
-    thee = Tree(sort_thee[int(len(sort_thee)/2)])
-    thee.tree_alignment(sort_thee)
-    thee.output_from_above()
+    tree = Tree(array[0])
+    for val in array: tree.add(val)
+    tree.output_from_above()
 
+    print("\nНове дерево яке вірівнянно по центру:")
+    tree.tree_alignment()
+    tree.output_from_above()
 
 if __name__ == '__main__':
     main()
