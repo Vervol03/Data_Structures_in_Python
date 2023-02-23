@@ -1,11 +1,11 @@
 class Tree:
-    # ініціалізація
+    # Ініціалізація
     def __init__(self, data):
         self.data = data
         self.left = None
         self.rigt = None
 
-    # додавання
+    # Додавання
     def add(self, val):
         if val < self.data:
             if self.left is None: self.left = Tree(val)
@@ -14,7 +14,7 @@ class Tree:
             if self.rigt is None: self.rigt = Tree(val)
             else: self.rigt.add(val)
 
-    # видалення елементу
+    # Видалення елементу
     def dell(self, val):
         arr = self.__list_tree()
         arr.remove(val)
@@ -22,13 +22,13 @@ class Tree:
         self.left, self.rigt = None, None
         for i in arr: self.add(i)
     
-    # виведення
+    # Виведення
     def output_from_above(self):
         print(self.data, end= " ")
         if self.left: self.left.output_from_above()
         if self.rigt: self.rigt.output_from_above()
 
-    # переведення у список
+    # Переведення у список
     def __list_tree(self, x=[], chek = True):
         if chek is True: x = []
         x += [self.data]
@@ -36,18 +36,18 @@ class Tree:
         if self.rigt: self.rigt.__list_tree(x,False)
         return x
 
-    # переведення у відсортований список
-    def __list_sort_treet(self, x=[], chek = True):
+    # Переведення у відсортований список
+    def __list_sort_tree(self, x=[], chek = True):
         if chek is True: x = []
-        if self.left: self.left.__list_sort_treet(x,False)
+        if self.left: self.left.__list_sort_tree(x,False)
         x += [self.data]
-        if self.rigt: self.rigt.__list_sort_treet(x,False)
+        if self.rigt: self.rigt.__list_sort_tree(x,False)
         return x
 
-    # вирівнювання дерева
+    # Вирівнювання дерева
     def tree_alignment(self, arr = [], check = True):
         if check is True:
-            arr = self.__list_sort_treet()
+            arr = self.__list_sort_tree()
             self.data = arr[int(len(arr)/2)]
             self.left, self.rigt = None, None
         if len(arr)==1: self.add(arr[0])
@@ -59,7 +59,7 @@ class Tree:
             self.tree_alignment(righ,False)
             self.tree_alignment(left,False)
     
-    # виведення не через функцію
+    # Виведення не через функцію
     def __repr__(self):
         return '['+', '.join([str(i)for i in self.__list_tree()])+']'
 
