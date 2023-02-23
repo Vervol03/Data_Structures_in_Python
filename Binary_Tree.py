@@ -14,6 +14,14 @@ class Tree:
             if self.rigt is None: self.rigt = Tree(val)
             else: self.rigt.add(val)
 
+    # видалення елементу
+    def dell(self, val):
+        arr = self.__list_tree()
+        arr.remove(val)
+        self.data = arr[0]
+        self.left, self.rigt = None, None
+        for i in arr: self.add(i)
+    
     # виведення
     def output_from_above(self):
         print(self.data, end= " ")
@@ -21,16 +29,25 @@ class Tree:
         if self.rigt: self.rigt.output_from_above()
 
     # переведення у список
-    def list_sort_treet(self, x=[]):
-        if self.left: self.left.list_sort_treet()
-        if not self.data in x: x += [self.data]
-        if self.rigt: self.rigt.list_sort_treet()
+    def __list_tree(self, x=[], chek = True):
+        if chek is True: x = []
+        x += [self.data]
+        if self.left: self.left.__list_tree(x,False)
+        if self.rigt: self.rigt.__list_tree(x,False)
+        return x
+
+    # переведення у відсортований список
+    def __list_sort_treet(self, x=[], chek = True):
+        if chek is True: x = []
+        if self.left: self.left.__list_sort_treet(x,False)
+        x += [self.data]
+        if self.rigt: self.rigt.__list_sort_treet(x,False)
         return x
 
     # вирівнювання дерева
-    def tree_alignment(self, arr=[], check = True):
+    def tree_alignment(self, arr = [], check = True):
         if check is True:
-            arr = self.list_sort_treet()
+            arr = self.__list_sort_treet()
             self.data = arr[int(len(arr)/2)]
             self.left, self.rigt = None, None
         if len(arr)==1: self.add(arr[0])
@@ -41,11 +58,15 @@ class Tree:
             left = arr[:mid]
             self.tree_alignment(righ,False)
             self.tree_alignment(left,False)
+    
+    # виведення не через функцію
+    def __repr__(self):
+        return '['+', '.join([str(i)for i in self.__list_tree()])+']'
 
 
 def main():
     print("Приклад не гарного бинарного дерева:")
-    array = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+    array = [0,1,2,3,4,5,6,7,8,9,]
     tree = Tree(array[0])
     for val in array: tree.add(val)
     tree.output_from_above()
@@ -53,6 +74,11 @@ def main():
     print("\nНове дерево яке вірівнянно по центру:")
     tree.tree_alignment()
     tree.output_from_above()
+    
+    print("\nВидалення елементу та виведення через repr:")
+    tree.dell(5)
+    tree.tree_alignment()
+    print(tree)
 
 if __name__ == '__main__':
     main()
